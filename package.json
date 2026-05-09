@@ -1,0 +1,25 @@
+{
+  "name": "nam-desh-ful-fol",
+  "version": "1.0.0",
+  "description": "Nam Desh Ful Fol — নাম দেশ ফুল ফল | by Sunny Rabius Sunny | Real-time multiplayer word game",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node src/server.js --dev"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "keywords": [
+    "game",
+    "multiplayer",
+    "bangla",
+    "local",
+    "websocket",
+    "ncff"
+  ],
+  "license": "MIT",
+  "dependencies": {},
+  "author": "Sunny Rabius Sunny",
+  "homepage": "https://github.com/sunnyrabiussunny/nam_desh_ful_fol"
+}
