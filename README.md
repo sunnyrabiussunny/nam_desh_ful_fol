@@ -2,14 +2,27 @@
 
 **by Sunny Rabius Sunny**
 
-Real-time multiplayer word game inspired by the classic Bangla game নাম-দেশ-ফুল-ফল.
-Players race to fill categories starting with a letter before the timer runs out.
+Real-time multiplayer Bengali word game. Players race to fill নাম · দেশ · ফুল · ফল starting with a chosen letter before the 30-second timer runs out.
 
 🔗 **https://github.com/sunnyrabiussunny/nam_desh_ful_fol**
 
 ---
 
-## ⚡ Quick Start
+## 🚀 One-Command Install (Ubuntu)
+
+For a full self-hosted Ubuntu install that runs as a background service:
+
+```bash
+git clone https://github.com/sunnyrabiussunny/nam_desh_ful_fol.git
+cd nam_desh_ful_fol
+sudo bash install.sh
+```
+
+That's it. Nam Desh Ful Fol will be running at **http://YOUR-IP:3210** and will auto-start on reboot.
+
+---
+
+## 🖥 Manual Start (Ubuntu / macOS / Windows)
 
 ```bash
 git clone https://github.com/sunnyrabiussunny/nam_desh_ful_fol.git
@@ -17,91 +30,108 @@ cd nam_desh_ful_fol
 node src/server.js
 ```
 
-Open **http://localhost:3000** — share the network IP with players on same WiFi.
-
 ---
 
 ## 📋 Requirements
 
-- **Node.js 16+** — zero npm dependencies, uses only built-in modules
+- **Node.js 16+** — zero npm dependencies, built-ins only
 - Any modern browser (Chrome, Firefox, Edge, Safari)
-- All players on the same WiFi network
+- All players on the **same WiFi network**
 
 **Install Node.js:**
-- Ubuntu/Debian: `curl -fsSL https://deb.nodesource.com/setup_20.x | sudo bash - && sudo apt install nodejs`
-- Windows: https://nodejs.org → Download LTS
-- macOS: `brew install node`
+```bash
+# Ubuntu/Debian
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo bash -
+sudo apt install nodejs
+
+# macOS
+brew install node
+
+# Windows — download from https://nodejs.org
+```
 
 ---
 
 ## 🎮 How to Play
 
-### Host
-1. Open `http://localhost:3000`
-2. Click **Host Game** → set rounds → share Room Code + your IP
-3. Wait for players → click **Start Game**
+### 🖥 Host (the person running the server)
 
-### Join
-1. Open `http://HOST_IP:3000` (e.g. `http://192.168.1.5:3000`)
-2. Click **Join Game** → enter name + Room Code
+1. Open **http://localhost:3210** in your browser
+2. Click **Host Game**
+3. Set number of rounds, customize categories if you want
+4. Share your **Room Code** and **IP address** with players
+5. Wait for everyone to join → click **Start Game**
 
-### Rules
-| Situation | Points |
-|-----------|--------|
-| Unique valid answer starting with the letter | **+10** |
-| Duplicate answer (same/phonetically similar as another player) | **0** |
-| Invalid word / gibberish | **0** |
-| Blank answer | **0** |
-| Max per round (4 categories) | **40** |
+### 📱 Players (everyone else on the same WiFi)
 
-- First player to submit starts a **30-second countdown**
-- Letter is picked by players in rotation each round
+1. Open **http://YOUR-HOST-IP:3210** in your browser
+   *(e.g. `http://192.168.1.5:3210`)*
+2. Click **Join Game**
+3. Enter your name and the **Room Code** from the host
+4. Wait for host to start!
+
+### 📖 Rules
+
+| Answer | Points |
+|--------|--------|
+| Valid unique answer starting with the letter | **+10 pts** |
+| Same answer as another player (duplicate) | **0 pts** |
+| Phonetically similar to another player's answer (e.g. Golap / Golaap) | **0 pts** |
+| Gibberish / invalid word | **0 pts** |
+| Blank | **0 pts** |
+| **Max per round** (4 categories × 10) | **40 pts** |
+
+- Each round: one player picks the letter (circular rotation)
+- First player to submit starts a **30-second countdown** for others
+- Most points after all rounds wins!
 
 ---
 
 ## ✨ Features
 
-- **Zero dependencies** — pure Node.js built-ins only
-- **Real-time WebSocket** — RFC 6455 from scratch, no libraries
+- **Zero dependencies** — pure Node.js built-ins, no npm install needed
 - **3–50+ players** on same WiFi
 - **Fuzzy phonetic matching** — Aparajita = Aporajita, Golap = Golaap, Litchi = Lichu
-- **Bangla + English** word validation — 778 names, 307 countries, 171 flowers, 134 fruits
-- **Gibberish detection** — AHGGKHKJ scores 0
-- **Custom categories** — replace any category before the game
-- **Demo mode** — play alone with AI bots
-- **Works on** Ubuntu, Debian, macOS, Windows
+- **Bangla + English** word lists — 778 names, 307 countries, 171 flowers, 134 fruits
+- **Gibberish detection** — random keyboard mashing scores 0
+- **Custom categories** — replace any category before starting
+- **Circular letter rotation** — every player gets a turn to pick
+- **Demo mode** — play alone with 3 AI bots to learn the game
+- Works on **Ubuntu, Debian, macOS, Windows**
 
 ---
 
 ## 🪟 Windows
 
 ```bat
-:: Install Node.js from https://nodejs.org first, then:
 git clone https://github.com/sunnyrabiussunny/nam_desh_ful_fol.git
 cd nam_desh_ful_fol
 node src/server.js
 ```
 
-Then open http://localhost:3000 in your browser.
-
-**Firewall:** Allow Node.js through Windows Firewall when prompted, so other devices can connect.
+Open **http://localhost:3210** — allow Node.js through Windows Firewall when prompted.
 
 ---
 
-## 🐧 Run as Linux Service (auto-start on boot)
+## ⚙️ Configuration
 
 ```bash
-# Run the installer which sets up systemd service
-bash install.sh
+# Custom port
+PORT=8080 node src/server.js
 
-# Enable auto-start
-sudo systemctl enable nam-desh-ful-fol
-sudo systemctl start nam-desh-ful-fol
+# Development mode (verbose logging)
+node src/server.js --dev
 ```
 
-**Firewall:**
+---
+
+## 🔧 Manage Service (Ubuntu after install)
+
 ```bash
-sudo ufw allow 3000/tcp
+sudo systemctl status  nam-desh-ful-fol
+sudo systemctl stop    nam-desh-ful-fol
+sudo systemctl restart nam-desh-ful-fol
+sudo systemctl disable nam-desh-ful-fol  # disable auto-start
 ```
 
 ---
@@ -110,16 +140,15 @@ sudo ufw allow 3000/tcp
 
 ```
 nam_desh_ful_fol/
-├── src/
-│   └── server.js        # Node.js server — zero dependencies
+├── src/server.js        ← Game server (zero dependencies)
 ├── public/
-│   ├── index.html       # Complete game UI
-│   ├── client.js        # Browser WebSocket client
-│   └── wordlists.js     # Word validation lists
-├── install.sh           # One-click Ubuntu/Linux installer
+│   ├── index.html       ← Complete game UI
+│   ├── client.js        ← Browser WebSocket client
+│   └── wordlists.js     ← Word validation (Bangla + English)
+├── install.sh           ← Ubuntu one-click installer
 ├── package.json
+├── GITHUB_GUIDE.md      ← How to push updates to GitHub
 ├── README.md
-├── GITHUB_GUIDE.md      # Step-by-step GitHub push guide
 └── LICENSE (MIT)
 ```
 
@@ -127,7 +156,7 @@ nam_desh_ful_fol/
 
 ## 📝 License
 
-MIT — free to use, share, and modify.
+MIT — free to use, share, modify.
 
 ---
 

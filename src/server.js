@@ -10,7 +10,7 @@ const fs     = require('fs');
 const path   = require('path');
 const os     = require('os');
 
-const PORT   = parseInt(process.env.PORT) || 3000;
+const PORT   = parseInt(process.env.PORT) || 3210;
 const PUBLIC = path.join(__dirname, '..', 'public');
 const isDev  = process.argv.includes('--dev');
 

@@ -174,9 +174,9 @@
     state.serverMode = 'server';
 
     // Parse host address
-    const parts = hostAddr ? hostAddr.split(':') : [window.location.hostname, '3000'];
+    const parts = hostAddr ? hostAddr.split(':') : [window.location.hostname, '3210'];
     const host  = parts[0].trim() || window.location.hostname;
-    const port  = parseInt(parts[1] || '3000');
+    const port  = parseInt(parts[1] || '3210');
     state._serverHost = host;
     state._serverPort = port;
 

@@ -1,87 +1,66 @@
-# GitHub Push Guide — Nam Desh Ful Fol
-**Repository:** https://github.com/sunnyrabiussunny/nam_desh_ful_fol
+# GitHub Guide — Nam Desh Ful Fol
+**Repo:** https://github.com/sunnyrabiussunny/nam_desh_ful_fol
 
 ---
 
-## Step 1 — Install Git (if not installed)
+## First time push (from Windows with Git Bash)
 
-**Ubuntu/Debian:**
-```bash
-sudo apt update && sudo apt install -y git
-```
-
-**Windows:**
-Download from https://git-scm.com/download/win → install with defaults.
-
-**macOS:**
-```bash
-brew install git
-```
+You said you already pushed once. Skip to **"Push updates"** below.
 
 ---
 
-## Step 2 — Configure Git (one time only)
+## Push updates to existing repository
+
+After downloading the new ZIP and extracting it:
 
 ```bash
-git config --global user.name "Sunny Rabius Sunny"
-git config --global user.email "your@email.com"
-```
+# 1. Go into the folder you already pushed
+cd path/to/nam_desh_ful_fol
 
----
+# 2. Copy new files from the ZIP into this folder
+#    (overwrite everything except the .git folder)
 
-## Step 3 — Create the repository on GitHub
-
-1. Go to https://github.com/new
-2. Repository name: `nam_desh_ful_fol`
-3. Description: `নাম দেশ ফুল ফল — Real-time multiplayer word game by Sunny Rabius Sunny`
-4. Set to **Public**
-5. Do NOT check "Add README" (we already have one)
-6. Click **Create repository**
-
----
-
-## Step 4 — Extract and push the Linux project
-
-```bash
-# Extract the ZIP
-cd ~/Downloads
-unzip ncff-battle-linux.zip -d nam_desh_ful_fol
-
-# Go into the project
-cd nam_desh_ful_fol
-
-# Initialize git
-git init
-
-# Add all files
+# 3. Stage all changes
 git add .
 
-# First commit
-git commit -m "Initial release — Nam Desh Ful Fol v1.0
+# 4. Commit
+git commit -m "v2 — fix letter picking, port 3210, improved installer"
 
-Real-time multiplayer নাম দেশ ফুল ফল game
-- Zero dependencies (pure Node.js built-ins only)
-- WebSocket server with RFC 6455 implementation
-- 778 person names + 307 countries + 171 flowers + 134 fruits
-- Bangla + English word validation with fuzzy phonetic matching
-- 3-50+ player support over local WiFi
-- by Sunny Rabius Sunny"
+# 5. Push
+git push
+```
 
-# Connect to GitHub
+If it asks for username/password — use your GitHub username and a **Personal Access Token** (not your password):
+- Go to https://github.com/settings/tokens/new
+- Name: `nam-desh-ful-fol`
+- Check **repo** scope → Generate → copy the token
+- Paste it as the password
+
+---
+
+## Full push from scratch (if needed)
+
+```bash
+# In Git Bash on Windows:
+cd ~/Downloads
+unzip nam-desh-ful-fol-linux.zip -d nam_desh_ful_fol
+cd nam_desh_ful_fol
+
+git init
+git add .
+git commit -m "Initial release — Nam Desh Ful Fol v2.0"
 git remote add origin https://github.com/sunnyrabiussunny/nam_desh_ful_fol.git
-
-# Push
 git branch -M main
 git push -u origin main
 ```
 
 ---
 
-## Step 5 — Verify it worked
+## After pushing — verify
 
 Open https://github.com/sunnyrabiussunny/nam_desh_ful_fol
 
-You should see all files including:
+Check that these files are there:
 - `src/server.js`
 - `public/index.html`
 - `public/client.js`
@@ -91,56 +70,12 @@ You should see all files including:
 
 ---
 
-## Step 6 — One-line install for anyone
+## Anyone can now install with:
 
-After pushing, anyone can install with:
 ```bash
 git clone https://github.com/sunnyrabiussunny/nam_desh_ful_fol.git
 cd nam_desh_ful_fol
-node src/server.js
+sudo bash install.sh
 ```
 
-Or with the install script:
-```bash
-git clone https://github.com/sunnyrabiussunny/nam_desh_ful_fol.git && cd nam_desh_ful_fol && bash install.sh
-```
-
----
-
-## Step 7 — If you need a GitHub token (HTTPS auth)
-
-GitHub no longer accepts passwords for push. Use a token:
-
-1. Go to https://github.com/settings/tokens/new
-2. Note: `nam-desh-ful-fol push`
-3. Check **repo** scope
-4. Click Generate token → copy it
-5. When `git push` asks for password, paste the token
-
-**Or use SSH (easier long-term):**
-```bash
-# Generate SSH key
-ssh-keygen -t ed25519 -C "your@email.com"
-
-# Copy the public key
-cat ~/.ssh/id_ed25519.pub
-
-# Add to GitHub: https://github.com/settings/keys → New SSH key → paste
-
-# Change remote to SSH
-git remote set-url origin git@github.com:sunnyrabiussunny/nam_desh_ful_fol.git
-
-# Push
-git push -u origin main
-```
-
----
-
-## Future updates
-
-After making changes:
-```bash
-git add .
-git commit -m "Your update message"
-git push
-```
+Game runs at **http://YOUR-IP:3210** ✅
