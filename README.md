@@ -156,8 +156,8 @@ nam_desh_ful_fol/
 
 ## 📝 License
 
-MIT — free to use, share, modify.
+MIT — free to use, share.
 
 ---
 
-*Made with ❤️ by Sunny Rabius Sunny*
+*Made by Sunny Rabius Sunny*
